@@ -1,0 +1,54 @@
+{
+  "name": "wpte-automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test":              "npx playwright test --project='Desktop Chrome' && node update-skill.js",
+    "test:all-browsers": "npx playwright test && node update-skill.js",
+    "test:headed":       "npx playwright test --headed --project='Desktop Chrome'",
+    "test:ui":           "npx playwright test --ui",
+
+    "test:chrome":       "npx playwright test --project='Desktop Chrome'",
+    "test:safari":       "npx playwright test --project='Desktop Safari'",
+    "test:mobile":       "npx playwright test --project='Mobile Chrome' --project='Mobile Safari'",
+    "test:mobile-chrome":"npx playwright test --project='Mobile Chrome'",
+    "test:mobile-safari":"npx playwright test --project='Mobile Safari'",
+    "test:ipad":         "npx playwright test --project='iPad'",
+
+    "test:auth":         "npx playwright test tests/auth/ --project='Desktop Chrome'",
+    "test:trips":        "npx playwright test tests/trips/ --project='Desktop Chrome'",
+    "test:booking":      "npx playwright test tests/booking/ --project='Desktop Chrome'",
+    "test:account":      "npx playwright test tests/account/ --project='Desktop Chrome'",
+    "test:addons":       "npx playwright test tests/addons/ --project='Desktop Chrome'",
+
+    "test:addons:fsd":              "npx playwright test tests/addons/fsd.spec.js --project='Desktop Chrome'",
+    "test:addons:group-discount":   "npx playwright test tests/addons/group-discount.spec.js --project='Desktop Chrome'",
+    "test:addons:extra-services":   "npx playwright test tests/addons/extra-services.spec.js --project='Desktop Chrome'",
+    "test:addons:partial-payment":  "npx playwright test tests/addons/partial-payment.spec.js --project='Desktop Chrome'",
+    "test:addons:travel-insurance": "npx playwright test tests/addons/travel-insurance.spec.js --project='Desktop Chrome'",
+    "test:addons:pickup":           "npx playwright test tests/addons/pickup-point.spec.js --project='Desktop Chrome'",
+    "test:addons:accommodation":    "npx playwright test tests/addons/accommodation.spec.js --project='Desktop Chrome'",
+
+    "test:admin":              "npx playwright test tests/admin/ --project='Desktop Chrome'",
+    "test:admin:global":       "npx playwright test tests/admin/global-settings.spec.js --project='Desktop Chrome'",
+    "test:admin:trip-settings":"npx playwright test tests/admin/trip-settings.spec.js --project='Desktop Chrome'",
+
+    "test:smoke":    "npx playwright test tests/auth/login.spec.js tests/trips/trip-detail.spec.js tests/booking/booking-flow.spec.js --project='Desktop Chrome' --reporter=list",
+    "test:release":  "npx playwright test tests/auth/ tests/trips/ tests/booking/ tests/account/ tests/addons/ tests/admin/ --project='Desktop Chrome' --project='Desktop Safari' --reporter=list",
+    "test:cross-browser": "npx playwright test tests/booking/ tests/trips/ --project='Desktop Chrome' --project='Desktop Safari' --project='Mobile Safari' --project='Mobile Chrome' --reporter=list",
+
+    "test:debug":    "npx playwright test --debug --project='Desktop Chrome'",
+    "report":        "npx playwright show-report",
+    "update-skill":  "node update-skill.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.0",
+    "dotenv": "^17.4.2"
+  }
+}
