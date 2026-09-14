@@ -27,7 +27,7 @@ jobs:
         ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
         EOF
     - name: Run Playwright tests
-      run: npm run test:smoke
+      run: npx playwright test tests/auth/login.spec.js tests/trips/trip-detail.spec.js tests/booking/booking-flow.spec.js --project='Desktop Chrome'
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
