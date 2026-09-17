@@ -20,14 +20,14 @@ jobs:
     - name: Create .env file
       run: |
         cat <<EOF > .env
-        BASE_URL="${{ secrets.BASE_URL }}"
-        TEST_USER_EMAIL="${{ secrets.TEST_USER_EMAIL }}"
-        TEST_USER_PASSWORD="${{ secrets.TEST_USER_PASSWORD }}"
-        ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}"
-        ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}"
+        BASE_URL=${{ secrets.BASE_URL }}
+        TEST_USER_EMAIL=${{ secrets.TEST_USER_EMAIL }}
+        TEST_USER_PASSWORD=${{ secrets.TEST_USER_PASSWORD }}
+        ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}
+        ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}
         EOF
     - name: Run Playwright tests
-      run: npx playwright test tests/auth/login.spec.js tests/trips/trip-detail.spec.js tests/booking/booking-flow.spec.js --project='Desktop Chrome'
+      run: npm run test:smoke
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
