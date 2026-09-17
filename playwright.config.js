@@ -28,6 +28,7 @@ module.exports = defineConfig({
     trace:      'retain-on-failure',
     actionTimeout:     30 * 1000,
     navigationTimeout: 60 * 1000,
+    // launchOptions: { slowMo: 800 } 
   },
 
   projects: [
