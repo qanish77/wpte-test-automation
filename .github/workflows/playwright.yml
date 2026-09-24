@@ -58,7 +58,10 @@ jobs:
     - name: Run Playwright tests (${{ inputs.suite }})
       id: run_tests
       continue-on-error: true
-      run: npm run test:${{ inputs.suite }}
+      # Some suite scripts (e.g. test:smoke) hardcode --reporter=list for terminal
+      # use, which replaces (not adds to) the config's reporters and skips the html
+      # report entirely. Force list+html back on for CI only; package.json untouched.
+      run: npm run test:${{ inputs.suite }} -- --reporter=list,html
 
     - name: Upload report as build artifact
       if: ${{ !cancelled() }}
@@ -80,5 +83,5 @@ jobs:
       uses: actions/deploy-pages@v4
 
     - name: Fail job if tests failed
-      if: steps.run_tests.outcome != 'success'
+      if: always() && steps.run_tests.outcome != 'success'
       run: exit 1
