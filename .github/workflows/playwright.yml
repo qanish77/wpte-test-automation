@@ -81,8 +81,13 @@ jobs:
       id: deployment
       uses: actions/deploy-pages@v4
 
-    - name: Add report link to run summary
+    - name: Add result to run summary
       if: ${{ !cancelled() }}
+      # Not linking the Pages URL here: one of the repo secrets happens to contain
+      # a substring of the GitHub username, so Actions masks part of that URL
+      # wherever it appears in log/summary output, breaking the link. The
+      # README on the repo homepage carries the real link instead — unaffected,
+      # since it isn't Actions output.
       run: |
         if [ "${{ steps.run_tests.outcome }}" = "success" ]; then
           STATUS="✅ Passed"
@@ -92,7 +97,7 @@ jobs:
         {
           echo "## 🧪 ${{ inputs.suite }} suite: $STATUS"
           echo ""
-          echo "### [📊 View full test report →](https://qanish77.github.io/wpte-test-automation/)"
+          echo "See the repo's README (Code tab) for the link to the full report."
         } >> "$GITHUB_STEP_SUMMARY"
 
     - name: Fail job if tests failed
